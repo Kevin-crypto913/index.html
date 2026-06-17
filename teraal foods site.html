@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teraal Foods – On Valorise Nos Céréales</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --vert:    #2C5F2D;
+    --vert2:   #3a7a3b;
+    --or:      #C9A84C;
+    --creme:   #FBF5E6;
+    --texte:   #1A1A1A;
+    --gris:    #5a5a5a;
+    --blanc:   #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--blanc);
+    color: var(--texte);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 6%;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 900;
+    color: var(--vert);
+    letter-spacing: 1px;
+  }
+  .logo span { color: var(--or); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    text-decoration: none; color: var(--texte);
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.5px;
+    transition: color .2s;
+  }
+  nav ul a:hover { color: var(--vert); }
+  .nav-cta {
+    background: var(--vert); color: var(--blanc) !important;
+    padding: 9px 20px; border-radius: 50px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: var(--vert2); color: var(--blanc) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a3a1b 0%, #2C5F2D 50%, #3a5a1a 100%);
+    display: flex; align-items: center;
+    padding: 120px 6% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero-content { max-width: 55%; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-block;
+    background: rgba(201,168,76,0.2); border: 1px solid var(--or);
+    color: var(--or); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 50px; margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--blanc); margin-bottom: 1.5rem;
+  }
+  .hero h1 em { color: var(--or); font-style: normal; }
+  .hero p {
+    color: rgba(255,255,255,0.8); font-size: 1.05rem;
+    line-height: 1.7; max-width: 480px; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--or); color: #1a1a1a;
+    padding: 14px 32px; border-radius: 50px;
+    font-weight: 700; font-size: 0.9rem;
+    text-decoration: none; transition: transform .2s, box-shadow .2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.4); }
+  .btn-outline {
+    border: 2px solid rgba(255,255,255,0.5); color: var(--blanc);
+    padding: 14px 32px; border-radius: 50px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none; transition: border-color .2s, background .2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--blanc); background: rgba(255,255,255,0.1); }
+
+  /* floating grain image placeholder */
+  .hero-visual {
+    position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+    width: 380px; height: 380px;
+    background: radial-gradient(circle at 40% 40%, rgba(201,168,76,0.25), rgba(44,95,45,0.1));
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid rgba(201,168,76,0.3);
+  }
+  .hero-visual-inner {
+    width: 280px; height: 280px;
+    background: radial-gradient(circle at 35% 35%, #C9A84C, #8B6914);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+
+  /* STATS */
+  .stats {
+    background: var(--creme); padding: 60px 6%;
+    display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; font-weight: 900;
+    color: var(--vert); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.8rem; color: var(--gris);
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* SECTION */
+  section { padding: 90px 6%; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--or);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900;
+    color: var(--texte); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-sub {
+    color: var(--gris); font-size: 1rem; line-height: 1.7;
+    max-width: 520px; margin-bottom: 3rem;
+  }
+
+  /* GAMME */
+  #gamme { background: var(--blanc); }
+  .gamme-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  .card {
+    border-radius: 20px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.07);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+  .card-img {
+    height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.5rem;
+  }
+  .card-img.mil { background: linear-gradient(135deg, #4a7c2d, #2C5F2D); }
+  .card-img.mais { background: linear-gradient(135deg, #d4a017, #C9A84C); }
+  .card-img.riz { background: linear-gradient(135deg, #c8b89a, #a89070); }
+  .card-body { padding: 1.5rem; }
+  .card-tag {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--or);
+    margin-bottom: 0.4rem;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    margin-bottom: 0.6rem;
+  }
+  .card-desc { font-size: 0.88rem; color: var(--gris); line-height: 1.6; }
+  .card-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .badge {
+    background: #f0f7f0; color: var(--vert);
+    font-size: 0.7rem; font-weight: 600;
+    padding: 4px 10px; border-radius: 20px;
+  }
+  .card-price {
+    margin-top: 1.2rem; font-weight: 700;
+    font-size: 0.9rem; color: var(--texte);
+  }
+  .card-price span { color: var(--gris); font-weight: 400; font-size: 0.8rem; }
+
+  /* VALEURS */
+  #valeurs { background: var(--creme); }
+  .valeurs-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .valeur-item {
+    background: var(--blanc); border-radius: 16px;
+    padding: 2rem; display: flex; gap: 1.2rem; align-items: flex-start;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .valeur-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: linear-gradient(135deg, var(--vert), var(--vert2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .valeur-title { font-weight: 700; margin-bottom: 0.3rem; }
+  .valeur-desc { font-size: 0.88rem; color: var(--gris); line-height: 1.5; }
+
+  /* TEMOIGNAGES */
+  #temoignages { background: var(--vert); }
+  #temoignages .section-title { color: var(--blanc); }
+  #temoignages .section-label { color: var(--or); }
+  #temoignages .section-sub { color: rgba(255,255,255,0.7); }
+  .temoignages-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+  }
+  .temoignage {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 16px; padding: 1.8rem;
+  }
+  .stars { color: var(--or); font-size: 1rem; margin-bottom: 0.8rem; }
+  .temoignage p { color: rgba(255,255,255,0.85); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1rem; font-style: italic; }
+  .temoignage-auteur { color: var(--blanc); font-weight: 600; font-size: 0.85rem; }
+  .temoignage-lieu { color: rgba(255,255,255,0.5); font-size: 0.78rem; }
+
+  /* COMMANDE */
+  #commande { background: var(--blanc); text-align: center; }
+  #commande .section-title { max-width: 600px; margin: 0 auto 1rem; }
+  #commande .section-sub { margin: 0 auto 2.5rem; }
+  .commande-btns { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .btn-green {
+    background: var(--vert); color: var(--blanc);
+    padding: 15px 36px; border-radius: 50px;
+    font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; transition: background .2s, transform .2s;
+    display: inline-block;
+  }
+  .btn-green:hover { background: var(--vert2); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer {
+    background: #111; color: rgba(255,255,255,0.5);
+    padding: 50px 6% 30px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 3rem;
+  }
+  .footer-brand .logo { font-size: 1.5rem; display: block; margin-bottom: 0.8rem; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
+  footer h4 { color: var(--blanc); font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.5px; }
+  footer ul { list-style: none; }
+  footer ul li { margin-bottom: 0.6rem; }
+  footer ul a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
+  footer ul a:hover { color: var(--or); }
+  .footer-bottom {
+    background: #111; color: rgba(255,255,255,0.3);
+    text-align: center; padding: 20px 6%;
+    font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Responsive quick fix */
+  @media (max-width: 768px) {
+    .hero-content { max-width: 100%; }
+    .hero-visual { display: none; }
+    .gamme-grid, .temoignages-grid, .valeurs-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; }
+    nav ul { display: none; }
+    .stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">TERAAL<span> FOODS</span></div>
+  <ul>
+    <li><a href="#gamme">Notre Gamme</a></li>
+    <li><a href="#valeurs">Nos Valeurs</a></li>
+    <li><a href="#temoignages">Avis</a></li>
+    <li><a href="#commande" class="nav-cta">Commander</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-eyebrow">🌾 Céréales 100% Sénégalaises</span>
+    <h1>On Valorise<br><em>Nos Céréales</em></h1>
+    <p>Le Araw Teraal Foods, c'est la bouillie traditionnelle sénégalaise réinventée — naturelle, nutritive, et prête en quelques minutes. Du mil, du maïs, du riz. Notre héritage, dans votre bol.</p>
+    <div class="hero-btns">
+      <a href="#gamme" class="btn-primary">Découvrir la Gamme</a>
+      <a href="#commande" class="btn-outline">Commander maintenant</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-visual-inner">🌾</div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Variétés disponibles</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Additif artificiel</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Production locale</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">5 min</div>
+    <div class="stat-label">Temps de préparation</div>
+  </div>
+</div>
+
+<!-- GAMME -->
+<section id="gamme">
+  <div class="section-label">Notre Sélection</div>
+  <div class="section-title">La Gamme Araw</div>
+  <div class="section-sub">Trois variétés pour tous les goûts et tous les moments de la journée. Fabriquées au Sénégal, pour les Sénégalais et la diaspora.</div>
+  <div class="gamme-grid">
+    <div class="card">
+      <div class="card-img mil">🌾</div>
+      <div class="card-body">
+        <div class="card-tag">Recette Originale</div>
+        <div class="card-title">Araw Mil</div>
+        <div class="card-desc">Granulés de mil pur, texture crémeuse et dense. Le goût authentique du Lakh traditionnel.</div>
+        <div class="card-badges">
+          <span class="badge">Riche en protéines</span>
+          <span class="badge">Sans gluten</span>
+          <span class="badge">Naturel</span>
+        </div>
+        <div class="card-price">500g – 1 500 FCFA &nbsp;<span>| 1kg – 2 800 FCFA</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img mais">🌽</div>
+      <div class="card-body">
+        <div class="card-tag">Variante Dorée</div>
+        <div class="card-title">Araw Maïs</div>
+        <div class="card-desc">Granulés de maïs sélectionnés, saveur légèrement sucrée. Idéal pour les enfants et les petits-déjeuners.</div>
+        <div class="card-badges">
+          <span class="badge">Source d'énergie</span>
+          <span class="badge">Idéal enfants</span>
+          <span class="badge">Naturel</span>
+        </div>
+        <div class="card-price">500g – 1 400 FCFA &nbsp;<span>| 1kg – 2 600 FCFA</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-img riz">🍚</div>
+      <div class="card-body">
+        <div class="card-tag">Version Légère</div>
+        <div class="card-title">Araw Riz</div>
+        <div class="card-desc">Granulés de riz parfumé, texture fine et légère. Excellente digestibilité, adapté aux régimes doux.</div>
+        <div class="card-badges">
+          <span class="badge">Digestif</span>
+          <span class="badge">Régime doux</span>
+          <span class="badge">Naturel</span>
+        </div>
+        <div class="card-price">500g – 1 400 FCFA &nbsp;<span>| 1kg – 2 600 FCFA</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALEURS -->
+<section id="valeurs">
+  <div class="section-label">Pourquoi Teraal</div>
+  <div class="section-title">Des céréales locales,<br>une fierté nationale</div>
+  <div class="valeurs-grid">
+    <div class="valeur-item">
+      <div class="valeur-icon">🌿</div>
+      <div>
+        <div class="valeur-title">100% Naturel</div>
+        <div class="valeur-desc">Sans conservateurs, sans additifs. Juste des céréales sénégalaises soigneusement sélectionnées.</div>
+      </div>
+    </div>
+    <div class="valeur-item">
+      <div class="valeur-icon">⏱️</div>
+      <div>
+        <div class="valeur-title">Rapide à préparer</div>
+        <div class="valeur-desc">Prêt en 5 minutes. Idéal pour les femmes actives et les familles modernes.</div>
+      </div>
+    </div>
+    <div class="valeur-item">
+      <div class="valeur-icon">💪</div>
+      <div>
+        <div class="valeur-title">Riche en nutriments</div>
+        <div class="valeur-desc">Fer, magnésium, zinc, potassium — tout ce qu'il faut pour bien commencer la journée.</div>
+      </div>
+    </div>
+    <div class="valeur-item">
+      <div class="valeur-icon">🇸🇳</div>
+      <div>
+        <div class="valeur-title">Fabrication Locale</div>
+        <div class="valeur-desc">Teraal Foods soutient les producteurs locaux et valorise le patrimoine culinaire sénégalais.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGES -->
+<section id="temoignages">
+  <div class="section-label">Ce qu'ils en disent</div>
+  <div class="section-title">Ils ont adopté le Araw</div>
+  <div class="section-sub">Des familles sénégalaises et de la diaspora qui ont retrouvé le goût du Lakh traditionnel.</div>
+  <div class="temoignages-grid">
+    <div class="temoignage">
+      <div class="stars">★★★★★</div>
+      <p>"Le Araw Mil me rappelle exactement le lakh que préparait ma grand-mère. En 5 minutes, c'est magique !"</p>
+      <div class="temoignage-auteur">Fatou D.</div>
+      <div class="temoignage-lieu">Dakar, Sénégal</div>
+    </div>
+    <div class="temoignage">
+      <div class="stars">★★★★★</div>
+      <p>"Je l'ai découvert chez Auchan et depuis, c'est notre petit-déjeuner du dimanche. Mes enfants adorent le Araw Maïs !"</p>
+      <div class="temoignage-auteur">Aminata S.</div>
+      <div class="temoignage-lieu">Thiès, Sénégal</div>
+    </div>
+    <div class="temoignage">
+      <div class="stars">★★★★★</div>
+      <p>"Vivant à Paris, je commande régulièrement. Ça me reconnecte à la maison. Produit de qualité, emballage top."</p>
+      <div class="temoignage-auteur">Moussa K.</div>
+      <div class="temoignage-lieu">Paris, France</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMANDE -->
+<section id="commande">
+  <div class="section-label">Disponible maintenant</div>
+  <div class="section-title">Trouvez Teraal Foods près de chez vous</div>
+  <div class="section-sub">Disponible dans toutes les grandes surfaces partenaires au Sénégal et bientôt en ligne pour la diaspora.</div>
+  <div class="commande-btns">
+    <a href="#" class="btn-green">🛒 Trouver un point de vente</a>
+    <a href="#" class="btn-primary">📦 Commander en ligne</a>
+  </div>
+  <p style="margin-top:2rem; font-size:0.85rem; color:#aaa;">Disponible chez : <strong>Auchan</strong> · <strong>Carrefour</strong> · <strong>Afia</strong></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="logo">TERAAL<span> FOODS</span></span>
+    <p>On valorise nos céréales. Teraal Foods, c'est la tradition sénégalaise modernisée pour la famille d'aujourd'hui.</p>
+  </div>
+  <div>
+    <h4>Produits</h4>
+    <ul>
+      <li><a href="#">Araw Mil</a></li>
+      <li><a href="#">Araw Maïs</a></li>
+      <li><a href="#">Araw Riz</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Nous suivre</h4>
+    <ul>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">TikTok</a></li>
+      <li><a href="#">Facebook</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">© 2025 Teraal Foods · Dakar, Sénégal · On Valorise Nos Céréales</div>
+
+</body>
+</html>
